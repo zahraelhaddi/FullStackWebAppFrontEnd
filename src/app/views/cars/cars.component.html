@@ -1,0 +1,137 @@
+<!-- <app-add-car-component></app-add-car-component>
+<app-change-status-component></app-change-status-component> -->
+<div class="container">
+    <!-- Page Heading -->
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Base de Données: Voitures</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Agence</th>
+                            <th>Marque</th>
+                            <th>Model</th>
+                            <th>Categorie</th>
+                            <th>Couleur</th>
+                            <th>Tax Annuelle</th>
+                            <th>Disponibilité</th>
+                            <th>Modifier la disponibilité</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let car of cars ;index as i">
+                            <td>{{ car.agency_id}}</td>
+                            <td>{{ car.marque }}</td>
+                            <td>{{ car.model }}</td>
+                            <td>{{ car.categorie }}</td>
+                            <td>{{ car.color}}</td>
+                            <td>{{ car.annual_tax }}</td>
+                            <td>
+                                <span [ngClass]="{'av': car.availability_status,'unav':!car.availability_status}">
+                                    {{ car.availability_status ? 'Available' : 'Unavailable' }}
+                                </span>
+
+                            </td>
+                            <!-- <td><button class="btn btn-primary"
+                                    (click)="updateAvailability(car.car_id, !car.availability_status)">
+                                    modifier
+                                </button></td> -->
+                            <td><button class="btn btn-primary" (click)="update(car.car_id,car.availability_status)">
+                                    modifier
+                                </button></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .av {
+        display: inline-block;
+        padding: 4px 12px;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        border-radius: 10px;
+        background-color: #4CAF50;
+        /* Green color for available */
+        color: white;
+        width: 80px;
+    }
+
+    .unav {
+        display: inline-block;
+        width: 80px;
+        padding: 4px 8px;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        border-radius: 10px;
+        background-color: #FF5733;
+        /* Green color for available */
+        color: white;
+
+    }
+
+
+    /* Define the common styling for both available and unavailable badges */
+</style>
+
+
+<!-- <app-add-car-component></app-add-car-component>
+<app-change-status-component></app-change-status-component> -->
+
+<style>
+    .av {
+        display: inline-block;
+        padding: 4px 12px;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        border-radius: 10px;
+        background-color: #4CAF50;
+        /* Green color for available */
+        color: white;
+        width: 80px;
+    }
+
+    .unav {
+        display: inline-block;
+        width: 80px;
+        padding: 4px 8px;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        border-radius: 10px;
+        background-color: #FF5733;
+        /* Green color for available */
+        color: white;
+
+    }
+
+
+    /* Define the common styling for both available and unavailable badges */
+</style>
+
+
+
+
+
+
+<router-outlet></router-outlet>
