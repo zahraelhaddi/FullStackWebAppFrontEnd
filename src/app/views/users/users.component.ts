@@ -7,10 +7,18 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./users.component.sass']
 })
 export class UsersComponent {
+  users:any;
   constructor(private usersService:UsersService) {
  
-    this.usersService.getAllusers().subscribe(data=>console.log(data))
+    this.getAllusers()
    }
   ngOnInit(): void {
   }
+   getAllusers(){
+    this.usersService.getAllusers().subscribe((data)=>{
+      this.users=data
+    },(error)=>{
+      console.error(error)
+    })
+   }
 }

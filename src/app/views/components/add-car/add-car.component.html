@@ -1,0 +1,246 @@
+<div class="container">
+    <form #f="ngForm" (ngSubmit)="add(f)">
+        <div class="row">
+            <div class="col-md-6">
+
+                <!-- agency_id validation start here -->
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">agence</label>
+                    <select class="form-control" required name="agency_id" #agency_id="ngModel" ngModel>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="2">3</option>
+                        <option value="2">4</option>
+                    </select>
+                </div>
+                <div class="alert alert-danger" *ngIf="agency_id.errors?.['required'] && agency_id.touched">
+                    agency_id is required
+                </div>
+                <div class="alert alert-danger" *ngIf="agency_id.errors?.['minlength'] && agency_id.touched">
+                    agency_id must be minimum 1 or 2 or 3 or 4
+                </div>
+                <!-- agnecy_id validation end here -->
+
+                <!-- model validation start here -->
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">model</label>
+                    <input type="text" class="form-control" placeholder="model" required name="model" #model="ngModel"
+                        minlength="2" maxlength="20" ngModel>
+                </div>
+                <div class="alert alert-danger" *ngIf="model.errors?.['required'] && model.touched">
+                    model is required
+                </div>
+                <div class="alert alert-danger" *ngIf="model.errors?.['minlength'] && model.touched">
+                    model must be minimum 2 caractere
+                </div>
+                <!-- model validation end here -->
+
+
+                <!-- tax validation start here -->
+                <!-- <div class="form-group">
+                <label for="exampleFormControlInput1">taxe annulle</label>
+                <input type="number" class="form-control" placeholder="tax" required name="tax" #tax="ngModel" ngModel>
+            </div>
+            <div class="alert alert-danger" *ngIf="tax.errors?.['required'] && tax.touched">
+                tax is required
+            </div> -->
+                <!-- tax validation end here -->
+
+
+
+
+                <!-- disponibilité validation start here -->
+
+                <!-- <div class="form-group">
+                <label for="exampleFormControlInput1">disponibilité</label>
+                <input type="text" class="form-control" placeholder="availability_status" availability_status required
+                    name="availability_status" #availability_status="ngModel" ngModel>
+                    <select class="form-control" required name="availability_status" #availability_status="ngModel" ngModel>
+                        <option value="1">true</option>
+                        <option value="2">false</option>
+                    </select>
+            </div>
+            <div class="alert alert-danger" *ngIf="availability_status.errors?.['required'] && availability_status.touched">
+                availability_status is required
+            </div>
+    
+            <div class="alert alert-danger" *ngIf="availability_status.errors?.['required'] && availability_status.touched">
+                the input must be boolean not string
+            </div> -->
+                <!-- availability_status validation end here -->
+
+                <!-- matricule validation start here -->
+
+
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">matricule</label>
+                    <input type="text" class="form-control" placeholder="matricule" required name="matricule"
+                        #matricule="ngModel" ngModel>
+                </div>
+                <div class="alert alert-danger" *ngIf="matricule.errors?.['required'] && matricule.touched">
+                    matricule is required
+                </div>
+                <!-- matricule validation end here -->
+
+                <!-- ville validation start here -->
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">ville</label>
+                    <input type="text" class="form-control" placeholder="ville" required name="ville" #ville="ngModel"
+                        ngModel>
+                </div>
+                <div class="alert alert-danger" *ngIf="ville.errors?.['required'] && ville.touched">
+                    ville is required
+                </div>
+                <!-- ville validation end here -->
+
+                <!-- marque validation start here -->
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">marque</label>
+                    <input type="text" class="form-control" placeholder="marque" required name="marque"
+                        #marque="ngModel" ngModel>
+                </div>
+                <div class="alert alert-danger" *ngIf="marque.errors?.['required'] && marque.touched">
+                    marque is required
+                </div>
+                <!-- marque validation end here -->
+            </div>
+
+
+            <!-- categorie validation start here -->
+
+            <div class="col-md-6">
+                <!-- color validation start here -->
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">couleur</label>
+                    <input type="text" class="form-control" placeholder="color" required name="color" #color="ngModel"
+                        ngModel>
+                </div>
+                <div class="alert alert-danger" *ngIf="color.errors?.['required'] && color.touched">
+                    color is required
+                </div>
+                <!-- color validation end here -->
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">catégorie</label>
+                    <select class="form-control" required name="categorie" #categorie="ngModel" ngModel>
+                        <option value="Sedan">Sedan</option>
+                        <option value="Compact">Compact</option>
+                        <option value="Hatchback">Hatchback</option>
+                        <option value="Coupe">Coupe</option>
+                    </select>
+                </div>
+                <div class="alert alert-danger" *ngIf="categorie.errors?.['required'] && categorie.touched">
+                    categorie is required
+                </div>
+                <!-- categorie validation end here -->
+
+                <!-- carburant_id validation start here -->
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">carburant_id</label>
+                    <select class="form-control" required name="carburant_id" #carburant_id="ngModel" ngModel>
+                        <optgroup label="1:Essence  , 2:Gasoil">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="alert alert-danger" *ngIf="carburant_id.errors?.['required'] && carburant_id.touched">
+                    carburant_id is required
+                </div>
+                <!-- carburant_id validation end here -->
+
+
+                <!-- date_immatri validation start here -->
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">date_immatriculation</label>
+                    <input type="date" class="form-control" placeholder="date_immatri" required name="date_immatri"
+                        #date_immatri="ngModel" ngModel>
+                </div>
+                <div class="alert alert-danger" *ngIf="date_immatri.errors?.['required'] && date_immatri.touched">
+                    date_immatri is required
+                </div>
+                <!-- date_immatri validation end here -->
+
+                <!-- puissance validation start here -->
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">puissance</label>
+                    <input type="number" class="form-control" placeholder="puissance" required name="puissance"
+                        #puissance="ngModel" ngModel>
+                </div>
+                <div class="alert alert-danger" *ngIf="puissance.errors?.['required'] && puissance.touched">
+                    puissance is required
+                </div>
+                <!-- puissance validation end here -->
+
+
+
+
+
+
+            </div>
+
+            <div class="top-alerts">
+                <div class="alert-container" *ngIf="messageSuccess">
+                    <div class="alert"
+                        [ngClass]="{'alert-danger': messageSuccess.msg === 'car already exists', 'alert-success': messageSuccess.msg === 'successfully added CAR'}">
+                        {{ messageSuccess.msg }}
+                    </div>
+
+                </div>
+            </div>
+
+            <style>
+                .top-alerts {
+                    position: fixed;
+                    top: 20px;
+                    right: 500px;
+                    z-index: 1000;
+                }
+
+                .alert-container {
+                    animation: slideIn 0.5s ease;
+                }
+
+                @keyframes slideIn {
+                    from {
+                        transform: translateY(-100%);
+                    }
+
+                    to {
+                        transform: translateY(0);
+                    }
+                }
+            </style>
+
+
+        </div>
+        <button class="btn btn-primary responsive-btn" [disabled]="f.invalid">ajouter
+            voiture</button>
+        <style>
+            .responsive-btn {
+                position: absolute;
+                top: 520px;
+                right: 30px;
+            }
+
+            @media (max-width: 768px) {
+                .responsive-btn {
+                    position: static;
+                    margin-top: 20px;
+                    /* Adjust the margin as needed */
+                    width: 100%;
+                    /* Make the button take full width on smaller screens */
+                }
+            }
+        </style>
+
+
+    </form>
+</div>

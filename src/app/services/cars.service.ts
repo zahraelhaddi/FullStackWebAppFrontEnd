@@ -48,5 +48,19 @@ export class CarsService {
       availability: newAvailability}
     );
   }
+
+  deleteCar(car_id:number){
+    return this.http.delete("http://localhost:4000/cars/"+car_id)
+  }
+
+  update(car_id:string,newprofile:any){
+    return this.http.patch("http://localhost:4000/cars/"+car_id,newprofile)
+  }
+
+  getOneCar(id:number){
+    return this.http.get("http://localhost:4000/cars/"+id,{headers:this.headerall,params:this.params})
+
+  }
+
   
 }

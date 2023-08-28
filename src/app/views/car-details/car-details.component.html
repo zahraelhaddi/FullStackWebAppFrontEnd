@@ -1,0 +1,39 @@
+<!-- 
+<p>studentdetails works!</p>
+
+<ul *ngIf="dataObject">
+    <li>{{dataObject.car_id}}</li>
+    <li>{{dataObject.car_id}}</li>
+
+    <li>{{dataObject.car_id}}</li>
+
+    <li>{{dataObject.car_id}}</li>
+
+    <li>{{dataObject.car_id}}</li>
+
+    <li>{{dataObject.car_id}}</li>
+
+    <li>{{dataObject.car_id}}</li>
+
+    <li>{{dataObject.car_id}}</li>
+
+
+
+</ul> -->
+<div class="container">
+    <div *ngIf="dataObject">
+        <h2>{{dataObject.marque}} {{ dataObject.model }}</h2>
+        <p><strong>ID :</strong> {{ dataObject.car_id }}</p>
+        <p><strong>Matricule :</strong> {{ dataObject.matricule }}</p>
+        <p><strong>Couleur :</strong> {{ dataObject.color }}</p>
+        <p><strong>Puissance :</strong> {{ dataObject.puissance }}</p>
+        <p><strong>Taxe annuelle :</strong> {{ dataObject.annual_tax }}</p>
+        <p><strong>Disponibilité :</strong> {{ dataObject.availability_status ? 'Disponible' : 'Indisponible' }}</p>
+        <p><strong>Catégorie :</strong> {{ dataObject.categorie }}</p>
+        <p><strong>Type de carburant :</strong> {{ dataObject.carburant_info.carburant_name }}</p>
+        <p><strong>Date d'immatriculation :</strong> {{ dataObject.date_immatri | date:'longDate' }}</p>
+        <p><strong>Agence :</strong> {{ dataObject.agency_info.agency_name }}</p>
+        <p><strong>Emplacement de l'agence :</strong> {{ dataObject.agency_info.agency_location }}</p>
+        <p><strong>Ville :</strong> {{ dataObject.ville }}</p>
+    </div>
+</div>

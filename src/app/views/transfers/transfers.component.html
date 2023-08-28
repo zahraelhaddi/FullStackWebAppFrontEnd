@@ -1,1 +1,71 @@
-<p>transfers works!</p>
+<div class="container">
+    <!-- Page Heading -->
+
+
+    <!-- DataTales Example -->
+    <!-- <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Liste Agences</h6>
+        </div> -->
+    <div class="container">
+        <div *ngFor="let transfer of transfers" class="card mb-3">
+            <div class="card-header" data-toggle="collapse" [attr.data-target]="'#collapse' + transfer.transfer_id">
+                Transfer ID: {{ transfer.transfer_id }}
+            </div>
+            <div [id]="'collapse' + transfer.transfer_id" class="collapse">
+                <div class="card-body">
+                    <p>User: {{ transfer.user_info.fullname }}</p>
+                    <p>Email: {{ transfer.user_info.email }}</p>
+                    <p>Source Agency: {{ transfer.source_agency.agency_name }} ({{
+                        transfer.source_agency.agency_location }})</p>
+                    <p>Destination Agency: {{ transfer.destination_agency.agency_name }} ({{
+                        transfer.destination_agency.agency_location }})</p>
+                    <p>Car Model: {{ transfer.car.model }}</p>
+                    <p>Annual Tax: ${{ transfer.car.annual_tax }}</p>
+                    <p>Transfer Date: {{ transfer.transfer_date | date }}</p>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-secondary btn-sm">
+            <i class=" fas fa-plus fa-sm"></i></button>
+    </div>
+
+
+    <!-- <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>transfert_id</th>
+                            <th>voiture transférée</th>
+                            <th>source</th>
+                            <th>destination</th>
+                            <th>utilisateur_id</th>
+                            <th>date transfert</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let transfer  of transfers ">
+                            <td>{{ transfer.transfer_id}}</td>
+                            <td>{{ transfer.car.car_id }}</td>
+                            <td>{{ transfer.source_agency.agency_id }}</td>
+                            <td>{{ transfer.destination_agency.agency_id }}</td>
+                            <td>{{ transfer.user_info.user_id }}</td>
+                            <td>{{ transfer.transfer_date }}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> -->
+    <!-- Add this before the closing </body> tag in your index.html -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+    <router-outlet></router-outlet>

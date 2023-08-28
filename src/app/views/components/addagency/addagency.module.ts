@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CarsRoutingModule } from './cars-routing.module';
-import { CarsComponent } from './cars.component';
+import { AddagencyRoutingModule } from './addagency-routing.module';
+import { AddagencyComponent } from './addagency.component';
 import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    CarsComponent,
+    AddagencyComponent
   ],
   imports: [
     CommonModule,
-    CarsRoutingModule,
+    AddagencyRoutingModule,
     FormsModule,
   ]
 })
-export class CarsModule { }
+export class AddagencyModule { }

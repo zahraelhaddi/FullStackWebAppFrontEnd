@@ -7,10 +7,31 @@ import { AgenciesService } from 'src/app/services/agencies.service';
   styleUrls: ['./agencies.component.sass']
 })
 export class AgenciesComponent {
+
+  agencies: any;
+    messageSuccess=''
+
+
+
   constructor(private agenciesService:AgenciesService) {
- 
-    this.agenciesService.getAllagencies().subscribe(data=>console.log(data))
-   }
+    
+   this.getAllagencies()   
+
+  }
   ngOnInit(): void {
   }
+
+  getAllagencies() {
+    this.agenciesService.getAllagencies().subscribe(
+      (data: any) => {
+        this.agencies = data;
+      },
+      (error) => {
+        console.error(error);
+      }
+    ); 
+  }
+
+  
+
 }

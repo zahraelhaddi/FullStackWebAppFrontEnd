@@ -6,6 +6,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthAdminLayoutComponent } from './layouts/auth-admin-layout/auth-admin-layout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { CarDetailsComponent } from './views/car-details/car-details.component';
 
 
 
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
     AppComponent ,
     AdminLayoutComponent,
     AuthAdminLayoutComponent,
+    CarDetailsComponent,
    
     ],
   imports: [

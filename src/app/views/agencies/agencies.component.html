@@ -1,1 +1,48 @@
-<p>agencies works!</p>
+<!-- <app-add-car-component></app-add-car-component>
+<app-change-status-component></app-change-status-component> -->
+<div class="container">
+    <!-- Page Heading -->
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Liste Agences</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let agency  of agencies ">
+                            <td>{{ agency.agency_id}}</td>
+                            <td>{{ agency.agency_name }}</td>
+                            <td>{{ agency.agency_location }}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <app-add-car-component></app-add-car-component>
+<app-change-status-component></app-change-status-component> -->
+
+
+
+
+
+
+
+
+<router-outlet></router-outlet>

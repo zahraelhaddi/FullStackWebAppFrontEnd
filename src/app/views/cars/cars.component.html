@@ -7,9 +7,10 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Base de Données: Voitures</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Liste Voitures
+            </h6>
         </div>
-        <div class="card-body">
+        <div class=" card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -21,7 +22,9 @@
                             <th>Couleur</th>
                             <th>Tax Annuelle</th>
                             <th>Disponibilité</th>
-                            <th>Modifier la disponibilité</th>
+                            <th>Modifier</th>
+                            <th>Actions</th>
+                            <!-- <th>Details</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -42,9 +45,23 @@
                                     (click)="updateAvailability(car.car_id, !car.availability_status)">
                                     modifier
                                 </button></td> -->
-                            <td><button class="btn btn-primary" (click)="update(car.car_id,car.availability_status)">
+                            <td><button class="btn btn-primary btn-sm"
+                                    (click)="update(car.car_id,car.availability_status)">
                                     modifier
                                 </button></td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm" (click)="delete(car.car_id, i)">
+                                    <i class="fas fa-trash fa-sm"></i>
+                                </button>
+                                <button class="btn btn-success btn-sm"
+                                    (click)="getdata(car.agency_id,car.marque,car.model,car.categorie,car.color,car.carburant_id,car.date_immatri,car.puissance,car.car_id,car.ville,car.matricule,car.annual_tax)"
+                                    data-toggle="modal" data-target="#exampleModal">
+                                    <i class="fas fa-pencil-alt fa-sm"></i>
+                                </button>
+                                <button class="btn btn-light btn-sm" (click)="details(car.car_id, i)">
+                                    <i class="fas fa-home fa-sm"></i>
+                                </button>
+                            </td>
 
                         </tr>
                     </tbody>
@@ -126,12 +143,215 @@
     }
 
 
+
+
+
     /* Define the common styling for both available and unavailable badges */
 </style>
 
 
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #f="ngForm" (ngSubmit)="updateCar(f)">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <!-- agency_id validation start here -->
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">agency_id</label>
+                                <select class="form-control" [(ngModel)]="dataCar.agency_id" required name="agency_id"
+                                    #agency_id="ngModel" ngModel>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                            <div class="alert alert-danger" *ngIf="agency_id.errors?.['required'] && agency_id.touched">
+                                agency_id is required
+                            </div>
+                            <div class="alert alert-danger"
+                                *ngIf="agency_id.errors?.['minlength'] && agency_id.touched">
+                                agency_id must be minimum 1 or 2 or 3 or 4
+                            </div>
+                            <!-- agnecy_id validation end here -->
+
+                            <!-- model validation start here -->
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">model</label>
+                                <input type="text" class="form-control" placeholder="model" [(ngModel)]="dataCar.model"
+                                    required name="model" #model="ngModel" minlength="2" maxlength="20" ngModel>
+                            </div>
+                            <div class="alert alert-danger" *ngIf="model.errors?.['required'] && model.touched">
+                                model is required
+                            </div>
+                            <div class="alert alert-danger" *ngIf="model.errors?.['minlength'] && model.touched">
+                                model must be minimum 2 caractere
+                            </div>
+                            <!-- model validation end here -->
 
 
+
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">matricule</label>
+                                <input type="text" class="form-control" placeholder="matricule"
+                                    [(ngModel)]="dataCar.matricule" required name="matricule" #matricule="ngModel"
+                                    ngModel>
+                            </div>
+                            <div class="alert alert-danger" *ngIf="matricule.errors?.['required'] && matricule.touched">
+                                matricule is required
+                            </div>
+                            <!-- matricule validation end here -->
+
+                            <!-- ville validation start here -->
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">ville</label>
+                                <input type="text" class="form-control" placeholder="ville" [(ngModel)]="dataCar.ville"
+                                    required name="ville" #ville="ngModel" ngModel>
+                            </div>
+                            <div class="alert alert-danger" *ngIf="ville.errors?.['required'] && ville.touched">
+                                ville is required
+                            </div>
+                            <!-- ville validation end here -->
+
+                            <!-- marque validation start here -->
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">marque</label>
+                                <input type="text" class="form-control" placeholder="marque"
+                                    [(ngModel)]="dataCar.marque" required name="marque" #marque="ngModel" ngModel>
+                            </div>
+                            <div class="alert alert-danger" *ngIf="marque.errors?.['required'] && marque.touched">
+                                marque is required
+                            </div>
+                            <!-- marque validation end here -->
+                        </div>
+
+
+                        <!-- categorie validation start here -->
+
+                        <div class="col-md-6">
+                            <!-- color validation start here -->
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">couleur</label>
+                                <input type="text" class="form-control" placeholder="color" [(ngModel)]="dataCar.color"
+                                    required name="color" #color="ngModel" ngModel>
+                            </div>
+                            <div class="alert alert-danger" *ngIf="color.errors?.['required'] && color.touched">
+                                color is required
+                            </div>
+                            <!-- color validation end here -->
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">catégorie</label>
+                                <select class="form-control" [(ngModel)]="dataCar.categorie" required name="categorie"
+                                    #categorie="ngModel" ngModel>
+                                    <option value="Sedan">Sedan</option>
+                                    <option value="Compact">Compact</option>
+                                    <option value="Hatchback">Hatchback</option>
+                                    <option value="Coupe">Coupe</option>
+                                </select>
+                            </div>
+                            <div class="alert alert-danger" *ngIf="categorie.errors?.['required'] && categorie.touched">
+                                categorie is required
+                            </div>
+                            <!-- categorie validation end here -->
+
+                            <!-- carburant_id validation start here -->
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">carburant_id</label>
+                                <select class="form-control" [(ngModel)]="dataCar.carburant_id" required
+                                    name="carburant_id" #carburant_id="ngModel" ngModel>
+                                    <optgroup label="1:Essence  , 2:Gasoil">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="alert alert-danger"
+                                *ngIf="carburant_id.errors?.['required'] && carburant_id.touched">
+                                carburant_id is required
+                            </div>
+                            <!-- carburant_id validation end here -->
+
+
+                            <!-- date_immatri validation start here -->
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">date_immatriculation</label>
+                                <input type="date" class="form-control" placeholder="date_immatri"
+                                    [(ngModel)]="dataCar.date_immatri" required name="date_immatri"
+                                    #date_immatri="ngModel" ngModel>
+                            </div>
+                            <div class="alert alert-danger"
+                                *ngIf="date_immatri.errors?.['required'] && date_immatri.touched">
+                                date_immatri is required
+                            </div>
+                            <!-- date_immatri validation end here -->
+
+                            <!-- puissance validation start here -->
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">puissance</label>
+                                <input type="number" class="form-control" placeholder="puissance"
+                                    [(ngModel)]="dataCar.puissance" required name="puissance" #puissance="ngModel"
+                                    ngModel>
+                            </div>
+                            <div class="alert alert-danger" *ngIf="puissance.errors?.['required'] && puissance.touched">
+                                puissance is required
+                            </div>
+                            <!-- puissance validation end here -->
+
+
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                    <button class="btn btn-primary responsive-btn">Enregistrer</button>
+                    <style>
+                        .responsive-btn {
+                            position: absolute;
+                            top: 479px;
+                            right: 100px;
+                        }
+
+                        @media (max-width: 768px) {
+                            .responsive-btn {
+                                position: static;
+                                margin-top: 20px;
+                                /* Adjust the margin as needed */
+                                width: 100%;
+                                /* Make the button take full width on smaller screens */
+                            }
+                        }
+                    </style>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <router-outlet></router-outlet>

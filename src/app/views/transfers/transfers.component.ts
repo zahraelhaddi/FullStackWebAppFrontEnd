@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { TransfersService } from 'src/app/services/transfers.service';
 
 @Component({
@@ -7,10 +8,42 @@ import { TransfersService } from 'src/app/services/transfers.service';
   styleUrls: ['./transfers.component.sass']
 })
 export class TransfersComponent {
-  constructor(private transfersService:TransfersService) {
+  transfers:any;
+  messageSuccess: any;
+  messageErr: any;
+
+  constructor(private transfersService:TransfersService,private route:Router) {
  
-    this.transfersService.getAlltransfers().subscribe(data=>console.log(data))
+    this.getAlltransfers()
    }
   ngOnInit(): void {
   }
+
+  getAlltransfers(){
+    this.transfersService.getAlltransfers().subscribe(
+      (data: any) => {
+        this.transfers = data;
+      },
+      (error) => {
+        console.error(error);
+      }
+    ); 
+  }
+
+  add(f:any){
+    let data=f.value
+    console.log(data)
+    this.transfersService.addTransfer(data).subscribe(response=>{
+      console.log(response); 
+            this.messageSuccess = response;
+      this.route.navigate(['/cars/add'])
+
+    },(err)=>{ 
+      this.messageErr=err.error
+      console.log(err.error)
+      // console.log(err.status)
+    })
+  }
+
+
 }
