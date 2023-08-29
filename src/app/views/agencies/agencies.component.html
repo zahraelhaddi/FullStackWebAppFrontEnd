@@ -17,20 +17,33 @@
                             <th>ID</th>
                             <th>Nom</th>
                             <th>Location</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let agency  of agencies ">
+                        <tr *ngFor="let agency  of agencies ;index as i">
                             <td>{{ agency.agency_id}}</td>
                             <td>{{ agency.agency_name }}</td>
                             <td>{{ agency.agency_location }}</td>
-
+                            <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">
+                                    <i class="fas fa-plus fa-sm"></i>
+                                </button>
+                                <button class="btn btn-secondary btn-sm" (click)="delete(agency.agency_id, i)">
+                                    <i class="fas fa-trash fa-sm"></i>
+                                </button>
+                                <button class="btn btn-success btn-sm"
+                                    (click)="getdata(agency.agency_id,agency.agency_name,agency.agency_location)"
+                                    data-toggle="modal" data-target="#UpdateModal">
+                                    <i class="fas fa-pencil-alt fa-sm"></i>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
 </div>
 
 
@@ -39,6 +52,89 @@
 <app-change-status-component></app-change-status-component> -->
 
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter une agence</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #f="ngForm" (ngSubmit)="addAgency(f)">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- agency_name validation -->
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Nom</label>
+                                <input type="text" class="form-control" placeholder="Nom de l'agence" required
+                                    name="agency_name" #agency_name="ngModel" ngModel>
+                            </div>
+
+                            <!-- agency_location validation -->
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Location</label>
+                                <input type="text" class="form-control" placeholder="location de l'agence" required
+                                    name="agency_location" #agency_location="ngModel" ngModel>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary responsive-btn">Enregistrer</button>
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="UpdateModal" tabindex="-1" aria-labelledby="UpdateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="UpdateModalLabel">Modifier une agence</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #updateForm="ngForm" (ngSubmit)="updateAgency(updateForm)">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- agency_name validation -->
+                            <div class="form-group">
+                                <label for="updateAgencyName">Nom</label>
+                                <input type="text" class="form-control" [(ngModel)]="dataAgency.agency_name"
+                                    placeholder="Nom de l'agence" required name="agency_name">
+                            </div>
+
+                            <!-- agency_location validation -->
+                            <div class="form-group">
+                                <label for="updateAgencyLocation">Location</label>
+                                <input type="text" class="form-control" [(ngModel)]="dataAgency.agency_location"
+                                    placeholder="location de l'agence" required name="agency_location">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary responsive-btn">Enregistrer</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AgenciesRoutingModule } from './agencies-routing.module';
 import { AgenciesComponent } from './agencies.component';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -11,7 +11,8 @@ import { AgenciesComponent } from './agencies.component';
   ],
   imports: [
     CommonModule,
-    AgenciesRoutingModule
+    AgenciesRoutingModule,
+    FormsModule,
   ]
 })
 export class AgenciesModule { }
