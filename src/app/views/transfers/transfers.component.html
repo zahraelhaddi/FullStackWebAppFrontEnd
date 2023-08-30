@@ -26,8 +26,9 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-secondary btn-sm">
-            <i class=" fas fa-plus fa-sm"></i></button>
+        <button class="btn btn-light btn-sm" data-toggle="modal" data-target="#transferModal">
+            <i class=" fas fa-exchange-alt fa-sm"></i>
+        </button>
     </div>
 
 
@@ -69,3 +70,69 @@
 
 
     <router-outlet></router-outlet>
+
+
+    <div class="modal fade" id="transferModal" tabindex="-1" aria-labelledby="transferModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="transferModalLabel">Transférer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form #f="ngForm" (ngSubmit)="add(f)">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- agency_name validation -->
+                                <div class="form-group">
+                                    <label for="transferAgencyName">voiture_id</label>
+                                    <input type="number" class="form-control" placeholder="Identifiant de la voiture"
+                                        required name="car_id" #agency_id="ngModel" ngModel>
+                                </div>
+
+                                <!-- agency_location validation -->
+                                <div class="form-group">
+                                    <label for="transferAgencyLocation">Agence source</label>
+                                    <input type="number" class="form-control" placeholder="source" required
+                                        name="source" #source="ngModel" ngModel>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="transferAgencyLocation">Agence Destination</label>
+                                    <input type="number" class="form-control" placeholder="source" required
+                                        name="destination" #destination="ngModel" ngModel>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="transferAgencyLocation">utilisateur_id</label>
+                                    <input type="number" class="form-control" placeholder="user_id" required
+                                        name="user_id" #user_id="ngModel" ngModel>
+                                </div>
+                                <div class="top-alerts">
+                                    <div class="alert-container" *ngIf="messageSuccess">
+                                        <div class="alert alert-success">
+                                            {{ messageSuccess.msg }}
+                                        </div>
+                                    </div>
+                                    <div class="alert-container" *ngIf="messageErr">
+                                        <div class="alert alert-danger">
+                                            {{ messageErr.error }}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <button class="btn btn-primary responsive-btn">Enregistrer</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>

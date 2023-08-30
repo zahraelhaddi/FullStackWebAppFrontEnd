@@ -35,9 +35,9 @@ export class TransfersComponent {
     console.log(data)
     this.transfersService.addTransfer(data).subscribe(response=>{
       console.log(response); 
-            this.messageSuccess = response;
-      this.route.navigate(['/cars/add'])
-
+            this.transfers=null;
+             this.getAlltransfers();
+             this.messageSuccess=response
     },(err)=>{ 
       this.messageErr=err.error
       console.log(err.error)

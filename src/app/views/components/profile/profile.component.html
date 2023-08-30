@@ -1,0 +1,100 @@
+<div class="container">
+    <div *ngIf="data">
+        <h2> {{ data.fullname }}</h2>
+        <p><strong>ID :</strong> {{data.user_id}}</p>
+        <p><strong>email :</strong> {{ data.email }}</p>
+        <p><strong>agency :</strong> {{ data.agency_id }}</p>
+        <button class="btn btn-success btn-sm" (click)="getdata(data.user_id,data.fullname,data.email)"
+            data-toggle="modal" data-target="#exampleModal">
+            <i class="fas fa-pencil-alt fa-sm"></i>
+        </button>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #f="ngForm" (ngSubmit)="updateUser(f)">
+
+                    <div class="col-md-6">
+
+                        <!-- fullname validation start here -->
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">fullname</label>
+                            <input type="text" class="form-control" [(ngModel)]="dataUser.fullname" required
+                                name="fullname" #fullname="ngModel" ngModel>
+
+                        </div>
+                        <div class="alert alert-danger" *ngIf="fullname.errors?.['required'] && fullname.touched">
+                            fullname is required
+                        </div>
+                        <div class="alert alert-danger" *ngIf="fullname.errors?.['minlength'] && fullname.touched">
+                            fullname must be minimum 1 or 2 or 3 or 4
+                        </div>
+                        <!-- agnecy_id validation end here -->
+
+                        <!-- model validation start here -->
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">email</label>
+                            <input type="email" class="form-control" placeholder="email" [(ngModel)]="dataUser.email"
+                                required name="email" #email="ngModel" minlength="2" maxlength="20" ngModel>
+                        </div>
+                        <div class="alert alert-danger" *ngIf="email.errors?.['required'] && email.touched">
+                            email is required
+                        </div>
+                        <div class="alert alert-danger" *ngIf="email.errors?.['minlength'] && email.touched">
+                            email must be minimum 2 caractere
+                        </div>
+                        <!-- model validation end here -->
+                        <div class="top-alerts">
+
+                            <div class="alert-container" *ngIf="messageSuccess">
+                                <div class="alert alert-success">
+                                    {{ messageSuccess.msg }}
+                                </div>
+                            </div>
+                            <div class="alert-container" *ngIf="messageErr">
+                                <div class="alert alert-danger">
+                                    {{ messageErr.err }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-primary responsive-btn">Enregistrer</button>
+                    <style>
+                        .responsive-btn {
+                            position: absolute;
+                            top: 479px;
+                            right: 100px;
+                        }
+
+                        @media (max-width: 768px) {
+                            .responsive-btn {
+                                position: static;
+                                margin-top: 20px;
+                                /* Adjust the margin as needed */
+                                width: 100%;
+                                /* Make the button take full width on smaller screens */
+                            }
+                        }
+                    </style>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,142 @@
+<div class="container">
+    <form #f="ngForm" (ngSubmit)="add(f)">
+        <div class="row">
+            <div class="col-md-6">
+
+                <!-- agency_id validation start here -->
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Nom & Prénom</label>
+                    <input type="text" class="form-control" placeholder="Nom complet" required name="fullname"
+                        #fullname="ngModel" minlength="2" maxlength="20" ngModel>
+                </div>
+                <div class="alert alert-danger" *ngIf="fullname.errors?.['required'] && fullname.touched">
+                    fullname is required
+                </div>
+                <div class="alert alert-danger" *ngIf="fullname.errors?.['minlength'] && fullname.touched">
+                    fullname must be minimum 1 or 2 or 3 or 4
+                </div>
+                <!-- agnecy_id validation end here -->
+
+                <!-- model validation start here -->
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">email</label>
+                    <input type="email" class="form-control" placeholder="email" required name="email" #email="ngModel"
+                        minlength="2" maxlength="20" ngModel>
+                </div>
+                <div class="alert alert-danger" *ngIf="email.errors?.['required'] && email.touched">
+                    email is required
+                </div>
+                <div class="alert alert-danger" *ngIf="email.errors?.['minlength'] && email.touched">
+                    email must be minimum 2 caractere
+                </div>
+                <!-- model validation end here -->
+
+
+
+                <!-- ville validation start here -->
+
+
+                <!-- ville validation end here -->
+
+                <!-- marque validation start here -->
+
+
+                <!-- marque validation end here -->
+            </div>
+
+
+            <!-- categorie validation start here -->
+
+            <div class="col-md-6">
+                <!-- color validation start here -->
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">agence</label>
+                    <select class="form-control" required name="agency" #agency="ngModel" ngModel>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="2">3</option>
+                        <option value="2">4</option>
+                    </select>
+                </div>
+                <div class="alert alert-danger" *ngIf="agency.errors?.['required'] && agency.touched">
+                    agence is required
+                </div>
+                <div class="alert alert-danger" *ngIf="agency.errors?.['minlength'] && agency.touched">
+                    agence must be minimum 1 or 2 or 3 or 4
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Mot de pass</label>
+                    <input type="password" class="form-control" placeholder="mot de passe" required name="password"
+                        #password="ngModel" ngModel>
+                </div>
+                <div class="alert alert-danger" *ngIf="password.errors?.['required'] && password.touched">
+                    password is required
+                </div>
+                <!-- color validation end here -->
+                <!-- puissance validation end here -->
+
+            </div>
+
+            <div class="top-alerts">
+
+                <div class="alert-container" *ngIf="messageSuccess">
+                    <div class="alert alert-success">
+                        {{ messageSuccess }}
+                    </div>
+                </div>
+                <div class="alert-container" *ngIf="messageErr">
+                    <div class="alert alert-danger">
+                        {{ messageErr }}
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                .top-alerts {
+                    position: fixed;
+                    top: 20px;
+                    right: 500px;
+                    z-index: 1000;
+                }
+
+                .alert-container {
+                    animation: slideIn 0.5s ease;
+                }
+
+                @keyframes slideIn {
+                    from {
+                        transform: translateY(-100%);
+                    }
+
+                    to {
+                        transform: translateY(0);
+                    }
+                }
+            </style>
+
+
+        </div>
+        <button class="btn btn-primary responsive-btn" [disabled]="f.invalid">ajouter
+            agent</button>
+        <style>
+            .responsive-btn {
+                position: absolute;
+                top: 300px;
+                right: 40px;
+            }
+
+            @media (max-width: 768px) {
+                .responsive-btn {
+                    position: static;
+                    margin-top: 20px;
+                    /* Adjust the margin as needed */
+                    width: 100%;
+                    /* Make the button take full width on smaller screens */
+                }
+            }
+        </style>
+
+
+    </form>
+</div>

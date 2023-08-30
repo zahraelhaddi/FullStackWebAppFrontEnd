@@ -8,11 +8,7 @@ export class TransfersService {
   headerAdmin=new HttpHeaders()
   .set('token',this.token)
   .set('role','Admin')
-
-  params=new HttpParams()
-  .set('secret','thisismysecretkey')
   
-
 
   headerall=new HttpHeaders()
   .set('token',this.token)
@@ -21,10 +17,10 @@ export class TransfersService {
   constructor(private http:HttpClient) { }
 
   getAlltransfers(){
-    return this.http.get('http://localhost:4000/transfers')
+    return this.http.get('http://localhost:4000/transfers',{headers:this.headerall})
   }
 
   addTransfer(profile:any){
-    return this.http.post('http://localhost:4000/transfers',profile,{headers:this.headerAdmin,params:this.params})
+    return this.http.post('http://localhost:4000/transfers',profile,{headers:this.headerall})
   }
 }

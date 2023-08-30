@@ -23,18 +23,18 @@ export class AgenciesService {
   constructor(private http:HttpClient) { }
 
   getAllagencies(){
-    return this.http.get('http://localhost:4000/agencies')
+    return this.http.get('http://localhost:4000/agencies',{headers:this.headerall})
   }
 
   addAgency(profile:any){
-    return this.http.post('http://localhost:4000/agencies',profile,{headers:this.headerAdmin,params:this.params})
+    return this.http.post('http://localhost:4000/agencies',profile,{headers:this.headerall})
 
   }
   deleteAgency(id:number){
-    return this.http.delete("http://localhost:4000/agencies/"+id)
+    return this.http.delete("http://localhost:4000/agencies/"+id,{headers:this.headerall})
   }
 
   update(agency_id:number,newprofile:any){
-    return this.http.patch("http://localhost:4000/agencies/"+agency_id,newprofile)
+    return this.http.patch("http://localhost:4000/agencies/"+agency_id,newprofile,{headers:this.headerall})
   }
 }

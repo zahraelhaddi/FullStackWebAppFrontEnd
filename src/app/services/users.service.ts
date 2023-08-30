@@ -1,13 +1,93 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
+  
+
+  profileAdmin={
+    username:'',
+    role:''
+  }
+  
+  
+  token:any = localStorage.getItem('token');
+
+  headerall=new HttpHeaders()
+  .set('token',this.token)
+  
+
+  helper=new JwtHelperService()
+
   constructor(private http:HttpClient) { }
 
   getAllusers(){
-    return this.http.get('http://localhost:4000/users')
+    return this.http.get('http://localhost:4000/users', { headers:this.headerall });
   }
+
+  addUser(profile:any){
+
+    return this.http.post('http://localhost:4000/users/add',profile,{headers:this.headerall})
+
+  }
+
+  getUserIdFromToken(): number {
+    const token: any = localStorage.getItem('token');
+    const decodedToken = this.helper.decodeToken(token);
+    return decodedToken.user_id; // Adjust property name as needed
+  }
+
+  getOneUser(id:number){
+    return  this.http.get("http://localhost:4000/users/"+id,{headers:this.headerall})
+  }
+  
+  updateUser(id:number,profile:any){
+    return   this.http.patch(`http://localhost:4000/users/`+id,profile,{headers:this.headerall});
+  }
+
+
+
+  loginAdmin(data:any){
+    return this.http.post('http://localhost:4000/admin/login',data)
+  }
+
+  saveDataProfile(token:any){
+    let decodeToken=this.helper.decodeToken(token)
+    localStorage.setItem('token',token)
+   }
+
+   getUsername(){
+    let token:any=localStorage.getItem('token')
+    let decodeToken=this.helper.decodeToken(token)
+    return decodeToken.username
+   }
+
+  LoggedIn(){
+    let token:any =localStorage.getItem('token')
+    if(!token){
+      return false
+    }
+    
+    if(!localStorage.getItem('token')){
+      return false
+    }
+    if(this.helper.isTokenExpired(token)){
+      return false
+    }
+    return true
+  }
+
+
+  hasSpecificAdminToken(): boolean {
+    const username = this.getUsername();
+    return username === "mohamed";
+    }
+
+  
+
+
+
 }

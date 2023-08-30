@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { TransfersRoutingModule } from './transfers-routing.module';
 import { TransfersComponent } from './transfers.component';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -11,7 +11,8 @@ import { TransfersComponent } from './transfers.component';
   ],
   imports: [
     CommonModule,
-    TransfersRoutingModule
+    TransfersRoutingModule,
+    FormsModule,
   ]
 })
 export class TransfersModule { }

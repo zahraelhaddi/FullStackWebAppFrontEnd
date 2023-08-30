@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -6,13 +6,14 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.sass']
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit{
   users:any;
   constructor(private usersService:UsersService) {
  
-    this.getAllusers()
+    
    }
   ngOnInit(): void {
+    this.getAllusers()
   }
    getAllusers(){
     this.usersService.getAllusers().subscribe((data)=>{
@@ -21,4 +22,13 @@ export class UsersComponent {
       console.error(error)
     })
    }
-}
+
+   login(f:any){
+    let data=f.value
+    console.log(data)
+
+    this.usersService.loginAdmin(data).subscribe(response=>{console.log(response),(error: any)=>
+      console.log(error)
+    
+   })
+  }}
