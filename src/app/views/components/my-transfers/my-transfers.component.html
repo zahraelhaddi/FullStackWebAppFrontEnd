@@ -1,0 +1,74 @@
+<!-- Card Header - Dropdown -->
+<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+    <h6 class="m-0 font-weight-bold text-primary">Transfers</h6>
+    <div class="dropdown no-arrow">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+            <div class="dropdown-header">Opération Transfer:</div>
+            <a class="dropdown-item" routerLink="/transfers">Ajouter</a>
+        </div>
+    </div>
+</div>
+<!-- Card Body -->
+<div class="card-body pt-6">
+    <!--begin::Table container-->
+    <div class="table-responsive flex-grow-1">
+        <!--begin::Table-->
+        <!--begin::Table head-->
+        <thead>
+            <tr>
+                <th class="header-cell">Id</th>
+                <th class="header-cell">source</th>
+                <th class="header-cell">destination</th>
+                <th class="header-cell">date</th>
+            </tr>
+            <style>
+                .header-cell {
+                    font-size: small;
+                    padding: 10px 15px;
+                    color: #878383;
+                }
+
+                .card-body {
+
+                    height: 300px;
+                    /* Adjust the height as needed */
+                    overflow-y: auto;
+                    /* Add scrollbar if content overflows */
+                }
+
+                .badge {
+                    color: rgb(8, 10, 11)
+                }
+            </style>
+        </thead>
+        <!--end::Table head-->
+        <!--begin::Table body-->
+        <tbody>
+            <tr *ngFor="let transfer of transfers; let i = index" class="table-row">
+                <td>
+                    <span class="badge py-2 px-3 fs-7 badge-light-primary ">{{transfer.transfer_id}}</span>
+                </td>
+                <td>
+                    <span class="badge py-2 px-3 fs-7 badge-light-primary ">{{transfer.source_agency_id}}</span>
+                </td>
+                <td>
+                    <span class="badge py-2 px-3 fs-7 badge-light-primary ">{{transfer.destination_agency_id}}</span>
+                </td>
+                <td>
+                    <span class="badge py-2 px-3 fs-7 badge-light-primary ">{{transfer.transfer_date |
+                        date}}</span>
+                </td>
+            </tr>
+        </tbody>
+        <div class="mt-4 text-center small" routerLink="/transfers">
+            <a class="fas fa-circle fa-sm text-info"></a>
+            <a class="text-center" routerLink="/transfers"> Voir plus ...</a>
+        </div>
+        <!--end::Table body-->
+    </div>
+    <!--end::Table-->
+</div>
