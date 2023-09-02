@@ -3,6 +3,7 @@ import { HttpClient , HttpHeaders, HttpParams} from '@angular/common/http';
 import { Router } from '@angular/router';
 import {  Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +25,7 @@ export class CarsService {
   constructor(private http:HttpClient,private route:Router) { }
 
   getAllcars(){
-    return this.http.get('http://localhost:4000/cars',{headers:this.headerall})
+    return this.http.get(`${environment.apiUrl}`+'cars',{headers:this.headerall})
     .pipe(
       catchError(error => {
         console.error('Error fetching cars:', error);
@@ -35,29 +36,41 @@ export class CarsService {
 
   addCar(profile:any){
 
-    return this.http.post('http://localhost:4000/cars',profile,{headers:this.headerall})
+    return this.http.post(`${environment.apiUrl}`+'cars',profile,{headers:this.headerall})
 
+  }
+
+  getAgencyCarsAvailableNb(id:any){
+    return   this.http.get(`${environment.apiUrl}`+"cars/agency/avnbr/"+id,{headers : this.headerall})
+  }
+  getAgencyCarsUnavailableNb(id:any){
+    return   this.http.get(`${environment.apiUrl}`+"cars/agency/unavnbr/"+id,{headers : this.headerall})
   }
 
 
   updateAvailability(carId: number, newAvailability: boolean) {
-     return this.http.patch('http://localhost:4000/cars/availability/'+carId,{
+     return this.http.patch(`${environment.apiUrl}`+'cars/availability/'+carId,{
       availability: newAvailability},{headers:this.headerall}
     );
   }
 
   deleteCar(car_id:number){
-    return this.http.delete("http://localhost:4000/cars/"+car_id,{headers:this.headerall})
+    return this.http.delete(`${environment.apiUrl}`+"cars/"+car_id,{headers:this.headerall})
   }
 
   update(car_id:string,newprofile:any){
-    return this.http.patch("http://localhost:4000/cars/"+car_id,newprofile,{headers:this.headerall})
+    return this.http.patch(`${environment.apiUrl}`+"cars/"+car_id,newprofile,{headers:this.headerall})
   }
 
   getOneCar(id:number){
-    return this.http.get("http://localhost:4000/cars/"+id,{headers:this.headerall})
+    return this.http.get(`${environment.apiUrl}`+"cars/"+id,{headers:this.headerall})
 
   }
+  getAgencyCars(id:any){
+    return this.http.get(`${environment.apiUrl}`+"cars/agency/"+id,{headers:this.headerall})
+  }
 
-  
+  gettotalCars(id:any){
+    return this.http.get(`${environment.apiUrl}`+"cars/agency/nbr/"+id,{headers:this.headerall})
+  }  
 }

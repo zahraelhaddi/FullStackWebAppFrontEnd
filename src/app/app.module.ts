@@ -10,12 +10,14 @@ import { CarDetailsComponent } from './views/car-details/car-details.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent ,
     AdminLayoutComponent,
     AuthAdminLayoutComponent,
     CarDetailsComponent,
+
    
     ],
   imports: [

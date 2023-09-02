@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,12 +26,12 @@ export class UsersService {
   constructor(private http:HttpClient) { }
 
   getAllusers(){
-    return this.http.get('http://localhost:4000/users', { headers:this.headerall });
+    return this.http.get(`${environment.apiUrl}`+'users', { headers:this.headerall });
   }
 
   addUser(profile:any){
 
-    return this.http.post('http://localhost:4000/users/add',profile,{headers:this.headerall})
+    return this.http.post(`${environment.apiUrl}`+'users/add',profile,{headers:this.headerall})
 
   }
 
@@ -40,18 +41,22 @@ export class UsersService {
     return decodedToken.user_id; // Adjust property name as needed
   }
 
+  getAgencyIdFromUserId(id: number) {
+    return this.http.get(`${environment.apiUrl}`+`c/${id}`, { headers: this.headerall });
+  }
+
   getOneUser(id:number){
-    return  this.http.get("http://localhost:4000/users/"+id,{headers:this.headerall})
+    return  this.http.get(`${environment.apiUrl}`+"users/"+id,{headers:this.headerall})
   }
   
   updateUser(id:number,profile:any){
-    return   this.http.patch(`http://localhost:4000/users/`+id,profile,{headers:this.headerall});
+    return   this.http.patch(`${environment.apiUrl}`+'users/'+id,profile,{headers:this.headerall});
   }
 
 
 
   loginAdmin(data:any){
-    return this.http.post('http://localhost:4000/admin/login',data)
+    return this.http.post(`${environment.apiUrl}`+'admin/login',data)
   }
 
   saveDataProfile(token:any){
@@ -83,7 +88,7 @@ export class UsersService {
 
   hasSpecificAdminToken(): boolean {
     const username = this.getUsername();
-    return username === "mohamed";
+    return username === environment.usernameAdmin;
     }
 
   

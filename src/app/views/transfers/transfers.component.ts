@@ -34,7 +34,7 @@ export class TransfersComponent {
     let data=f.value
     console.log(data)
     this.transfersService.addTransfer(data).subscribe(response=>{
-      console.log(response); 
+      //console.log(response); 
             this.transfers=null;
              this.getAlltransfers();
              this.messageSuccess=response

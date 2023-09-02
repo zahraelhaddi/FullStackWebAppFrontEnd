@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,10 +18,14 @@ export class TransfersService {
   constructor(private http:HttpClient) { }
 
   getAlltransfers(){
-    return this.http.get('http://localhost:4000/transfers',{headers:this.headerall})
+    return this.http.get(`${environment.apiUrl}`+'transfers',{headers:this.headerall})
   }
 
   addTransfer(profile:any){
-    return this.http.post('http://localhost:4000/transfers',profile,{headers:this.headerall})
+    return this.http.post(`${environment.apiUrl}`+'transfers',profile,{headers:this.headerall})
+  }
+
+  getUserTransfers(user_id:number){
+    return  this.http.get(`${environment.apiUrl}`+'transfers/user/'+user_id,{headers:this.headerall})
   }
 }
