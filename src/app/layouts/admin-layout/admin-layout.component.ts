@@ -1,4 +1,4 @@
-import {Component,} from '@angular/core';
+import {Component, Renderer2, ViewChild,} from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -10,7 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
 
 export class AdminLayoutComponent {
   username:any;
-  constructor(private usersService:UsersService, private route:Router) {
+  constructor(private usersService:UsersService, private route:Router,private renderer: Renderer2) {
  
     this.username=this.usersService.getUsername()
    
@@ -22,6 +22,14 @@ export class AdminLayoutComponent {
   logout(){
     localStorage.removeItem('token')
     this.route.navigate(['/admin/login'])
+  }
+
+  @ViewChild('exampleModal') modal: any; // Reference to the modal element
+
+
+  openProfileModal() {
+    // Use Renderer2 to open the modal
+    this.renderer.selectRootElement(this.modal.nativeElement).modal('show');
   }
   
 }

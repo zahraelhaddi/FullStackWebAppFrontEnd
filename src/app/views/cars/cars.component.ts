@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PaginationInstance } from 'ngx-pagination';
 import { CarsService } from 'src/app/services/cars.service';
 
 @Component({
@@ -26,6 +27,9 @@ export class CarsComponent implements OnInit {
     matricule:'',
     annual_tax:0
   }
+  filteredCars: any;
+  
+  
 
 
 
@@ -34,15 +38,15 @@ export class CarsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
   }
-
+  
   
 
   getAllcars() {
     this.carsService.getAllcars().subscribe(
       (data: any) => {
         this.cars = data;
+        this.filteredCars=this.cars;
       },
       (error) => {
         console.error(error);
@@ -143,15 +147,35 @@ export class CarsComponent implements OnInit {
         this.route.navigate(['/cardetails/'+id])
       }
     
-    
+      config: PaginationInstance = {
+        itemsPerPage: 8,
+        currentPage: 1
+      };
       
+      // Search filter
+      searchTerm: string = '';
+      
+      // 
+      pageChanged(event: any) {
+        this.config.currentPage = event;
+      }
 
-
- 
+      applyFilter() {
+        this.filteredCars= this.cars.filter((car: { agency_id:number;marque: string; model: string; categorie: string; color: string; }) =>{
+        const searchTerm = this.searchTerm.toLowerCase();
+    return (
+      car.agency_id.toString().includes(searchTerm) ||
+      car.marque.toLowerCase().includes(searchTerm) ||
+      car.model.toLowerCase().includes(searchTerm) ||
+      car.categorie.toLowerCase().includes(searchTerm) ||
+      car.color.toLowerCase().includes(searchTerm)
+      // Add more fields as needed
+    );
+    
+    });
+    this.config.currentPage = 1;
+        
+        
+      
 }
- 
-
-
-
-
-
+}

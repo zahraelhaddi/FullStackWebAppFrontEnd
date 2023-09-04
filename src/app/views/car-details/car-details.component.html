@@ -1,39 +1,181 @@
-<!-- 
-<p>studentdetails works!</p>
-
-<ul *ngIf="dataObject">
-    <li>{{dataObject.car_id}}</li>
-    <li>{{dataObject.car_id}}</li>
-
-    <li>{{dataObject.car_id}}</li>
-
-    <li>{{dataObject.car_id}}</li>
-
-    <li>{{dataObject.car_id}}</li>
-
-    <li>{{dataObject.car_id}}</li>
-
-    <li>{{dataObject.car_id}}</li>
-
-    <li>{{dataObject.car_id}}</li>
-
-
-
-</ul> -->
 <div class="container">
-    <div *ngIf="dataObject">
-        <h2>{{dataObject.marque}} {{ dataObject.model }}</h2>
-        <p><strong>ID :</strong> {{ dataObject.car_id }}</p>
-        <p><strong>Matricule :</strong> {{ dataObject.matricule }}</p>
-        <p><strong>Couleur :</strong> {{ dataObject.color }}</p>
-        <p><strong>Puissance :</strong> {{ dataObject.puissance }}</p>
-        <p><strong>Taxe annuelle :</strong> {{ dataObject.annual_tax }}</p>
-        <p><strong>Disponibilité :</strong> {{ dataObject.availability_status ? 'Disponible' : 'Indisponible' }}</p>
-        <p><strong>Catégorie :</strong> {{ dataObject.categorie }}</p>
-        <p><strong>Type de carburant :</strong> {{ dataObject.carburant_info.carburant_name }}</p>
-        <p><strong>Date d'immatriculation :</strong> {{ dataObject.date_immatri | date:'longDate' }}</p>
-        <p><strong>Agence :</strong> {{ dataObject.agency_info.agency_name }}</p>
-        <p><strong>Emplacement de l'agence :</strong> {{ dataObject.agency_info.agency_location }}</p>
-        <p><strong>Ville :</strong> {{ dataObject.ville }}</p>
+    <div *ngIf="dataObject" class="inner-card card">
+        <div class="card-header bg-primary text-white">
+            <style>
+                .h2 {
+                    text-align: center;
+                }
+            </style>
+            <h2><i class="fas fa-plus-sm"></i> {{ dataObject.marque }} {{ dataObject.model }}</h2>
+
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong># Id:</strong> {{ dataObject.car_id }}</p>
+                    <p><i class="fas fa-car"></i> <strong> Matricule:</strong> {{ dataObject.matricule }}</p>
+                    <p><i class="fas fa-paint-brush"></i> <strong> Couleur:</strong> {{ dataObject.color }}</p>
+                    <p><i class="fas fa-tachometer-alt"></i> <strong> Puissance:</strong> {{ dataObject.puissance }}
+                        chevaux
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p><i class="fas fa-money-bill-wave"></i> <strong> Taxe annuelle:</strong> {{ dataObject.annual_tax
+                        }} DH</p>
+                    <p>
+                        <i class="fas fa-check-circle"></i>
+                        <strong> Disponibilité: </strong>
+                        <span [ngStyle]="{'background-color': dataObject.availability_status ? '#4CAF50' : '#FF5733',
+                                             'display': 'inline-block',
+                                             'align-items': 'center',
+                                             'padding': '2px 3px',
+                                             'font-size': '12px',
+                                             'font-weight': 'bold',
+                                             'text-center':'center',
+                                             'white-space': 'nowrap',
+                                             'vertical-align': 'middle',
+                                             'border-radius': '10px',
+                                             'color': 'white',
+                                             'width': '76px'}">
+                            {{ dataObject.availability_status ? 'Disponible' : 'Indisponible' }}
+                        </span>
+                    </p>
+                    <p><i class="fas fa-building"></i> <strong> Agence:</strong> {{ dataObject.agency_info.agency_name
+                        }}</p>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong> Emplacement de l'agence:</strong> {{
+                        dataObject.agency_info.agency_location }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><i class="fas fa-tag"></i> <strong> Catégorie:</strong> {{ dataObject.categorie }}</p>
+                    <p><i class="fas fa-gas-pump"></i> <strong> Type de carburant:</strong> {{
+                        dataObject.carburant_info.carburant_name }}</p>
+                    <p><i class="far fa-calendar"></i> <strong> Date d'immatriculation:</strong> {{
+                        dataObject.date_immatri | date:'longDate' }}</p>
+                </div>
+            </div>
+            <a routerLink="/cars" class="btn btn-primary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-arrow-right"></i>
+                </span>
+                <span class="text">Retourner à la liste des voitures</span>
+            </a>
+            <style>
+                .btn-icon-split {
+                    margin-left: 710px;
+                }
+            </style>
+        </div>
     </div>
 </div>
+
+
+
+<!-- <style>
+    /* Styles for the card */
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Adjust icons size and spacing */
+    .card p i {
+        font-size: 1.2rem;
+        margin-right: 5px;
+    }
+
+    /* Divider style */
+    .divider {
+        border-top: 1px solid #ddd;
+        margin: 10px 0;
+    }
+
+    /* Styles for the outer card */
+    .outer-card {
+        background-color: #f2f2f2;
+        /* Background color for the outer card */
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .outer-card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Styles for the inner card */
+    .inner-card {
+        background-color: #1e3d73;
+        /* Background color for the inner card */
+        border-radius: 5px;
+        padding: 20px;
+        color: #fff;
+        /* Text color for the inner card */
+    }
+
+    /* Adjust icons size and spacing */
+    .inner-card p i {
+        font-size: 1.2rem;
+        margin-right: 5px;
+    }
+
+    /* Divider style */
+    .divider {
+        border-top: 1px solid #ddd;
+        margin: 10px 0;
+    }
+</style> -->
+
+<style>
+    /* Styles for the card container */
+    .card-container {
+        display: flex;
+        flex-wrap: nowrap;
+        /* Prevent cards from wrapping */
+        overflow-x: auto;
+        color: #fff;
+        /* Enable horizontal scrolling if necessary */
+    }
+
+    /* Styles for individual inner cards */
+    .inner-card {
+        flex: 0 0 auto;
+        /* Let the cards have their natural width */
+        margin-right: 10px;
+        /* Add spacing between cards */
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: box-shadow 0.3s ease;
+        background-color: #f2f2f2;
+        /* Background color for the inner cards */
+        color: #333;
+        /* Text color for the inner cards */
+    }
+
+    .inner-card:last-child {
+        margin-right: 0;
+        /* Remove margin from the last card */
+    }
+
+    .inner-card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Styles for inner card content */
+    .inner-card-content {
+        padding: 10px;
+        /* Add spacing within the inner cards */
+    }
+</style>

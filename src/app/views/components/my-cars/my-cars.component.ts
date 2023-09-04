@@ -25,7 +25,7 @@ export class MyCarsComponent {
           (response) => {
             // Assuming response is an object, convert it to an array
             this.cars = Object.values(response); // Or use a different conversion method
-            console.log('Cars:', this.cars); // Add this line for debugging
+            //console.log('Cars:', this.cars); // Add this line for debugging
             // Handle the response here
           },
           (error) => {

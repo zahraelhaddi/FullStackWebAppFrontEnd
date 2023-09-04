@@ -10,6 +10,18 @@
             <h6 class="m-0 font-weight-bold text-primary">Liste Agences</h6>
         </div>
         <div class="card-body">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="applyFilter()" placeholder="Search..."
+                    class="search-input" />
+                <div>
+                    <button title="Ajouter une agence" class="add-button" data-toggle="modal"
+                        data-target="#exampleModal">
+                        <i class=" fas fa-plus fa-sm"></i>
+                    </button>
+                </div>
+
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -21,31 +33,103 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let agency  of agencies ;index as i">
+                        <tr *ngFor="let agency  of filteredagencies | paginate: config ;index as i">
                             <td>{{ agency.agency_id}}</td>
                             <td>{{ agency.agency_name }}</td>
                             <td>{{ agency.agency_location }}</td>
-                            <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">
-                                    <i class="fas fa-plus fa-sm"></i>
-                                </button>
-                                <button class="btn btn-secondary btn-sm" (click)="delete(agency.agency_id, i)">
-                                    <i class="fas fa-trash fa-sm"></i>
-                                </button>
-                                <button class="btn btn-success btn-sm"
+                            <td>
+                                <button class="btn btn-success btn-sm  mr-2"
                                     (click)="getdata(agency.agency_id,agency.agency_name,agency.agency_location)"
                                     data-toggle="modal" data-target="#UpdateModal">
                                     <i class="fas fa-pencil-alt fa-sm"></i>
                                 </button>
+                                <button class="btn btn-secondary btn-sm" (click)="delete(agency.agency_id, i)">
+                                    <i class="fas fa-trash fa-sm"></i>
+                                </button>
+
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <pagination-controls (pageChange)="config.currentPage = $event"></pagination-controls>
     </div>
 
 </div>
+<style>
+    .add-button {
+        background-color: #233f5c;
+        /* Button background color */
+        color: #fff;
+        /* Button text color */
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        margin-left: 500px;
+        /* Add margin to separate from the search bar */
+    }
 
+    .add-button:hover {
+        background-color: #0056b3;
+        /* Button background color on hover */
+    }
+
+    .add-button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 797px;
+    }
+
+    .search-container {
+        display: flex;
+        align-items: center;
+        background-color: #f2f3f5;
+        /* Background color */
+        padding: 6px;
+        border-radius: 5px;
+        width: 100%;
+        max-width: 250px;
+        /* Adjust the maximum width as needed */
+        margin: 0;
+        margin-bottom: 10px;
+        margin-top: 0px;
+        /* Move the search container to the left */
+    }
+
+    .search-icon {
+        font-size: 18px;
+        margin-right: 6px;
+        color: #6a7a8a;
+        /* Icon color */
+    }
+
+    .search-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        font-size: 16px;
+        color: #333;
+        /* Text color */
+    }
+
+    /* Add hover and focus styles for interactivity */
+    .search-input:hover {
+        background-color: #f2f3f5;
+        /* Background color on hover */
+    }
+
+    .search-input:focus {
+        background-color: #f2f3f5;
+        /* Background color on focus */
+    }
+</style>
 
 
 <!-- <app-add-car-component></app-add-car-component>

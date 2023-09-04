@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { PaginationInstance } from 'ngx-pagination';
 import { AgenciesService } from 'src/app/services/agencies.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class AgenciesComponent {
     agency_name:'',
     agency_location:''
   }
+  filteredagencies: any;
 
 
   constructor(private agenciesService:AgenciesService) {
@@ -31,6 +33,7 @@ export class AgenciesComponent {
     this.agenciesService.getAllagencies().subscribe(
       (data: any) => {
         this.agencies = data;
+        this.filteredagencies=this.agencies;
       },
       (error) => {
         console.error(error);
@@ -97,5 +100,28 @@ export class AgenciesComponent {
     
     })
   }
+
+  config: PaginationInstance = {
+    itemsPerPage: 8,
+    currentPage: 1
+  };
+  
+  // Search filter
+  searchTerm: string = '';
+  
+  // 
+  pageChanged(event: any) {
+    this.config.currentPage = event;
+  }
+
+applyFilter() {
+  const searchTerm = this.searchTerm.toLowerCase();
+  this.filteredagencies = this.agencies.filter((agency: {  agency_id:number;agency_location:string;}) => {
+    return (
+      agency.agency_id.toString().includes(searchTerm)
+      ||      agency.agency_location.toLowerCase().includes(searchTerm
+    )
+  )});
+}
 
 }

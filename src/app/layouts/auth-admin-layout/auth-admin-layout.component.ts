@@ -51,7 +51,7 @@ export class AuthAdminLayoutComponent {
         console.log(response)
         if (this.datareceived.token) {
           this.usersService.saveDataProfile(this.datareceived.token);
-          this.route.navigate(['/cars/']);
+          this.route.navigate(['/dashboard']);
         } else {
           this.messageErr = 'Email or password invalid';
         }

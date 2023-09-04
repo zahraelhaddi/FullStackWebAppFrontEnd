@@ -14,10 +14,7 @@
                     </select>
                 </div>
                 <div class="alert alert-danger" *ngIf="agency_id.errors?.['required'] && agency_id.touched">
-                    agency_id is required
-                </div>
-                <div class="alert alert-danger" *ngIf="agency_id.errors?.['minlength'] && agency_id.touched">
-                    agency_id must be minimum 1 or 2 or 3 or 4
+                    Champ agence ID est requis
                 </div>
                 <!-- agnecy_id validation end here -->
 
@@ -28,10 +25,10 @@
                         minlength="2" maxlength="20" ngModel>
                 </div>
                 <div class="alert alert-danger" *ngIf="model.errors?.['required'] && model.touched">
-                    model is required
+                    Champ model est requis
                 </div>
                 <div class="alert alert-danger" *ngIf="model.errors?.['minlength'] && model.touched">
-                    model must be minimum 2 caractere
+                    Champ model est au minimum 3 caractères
                 </div>
                 <!-- model validation end here -->
 
@@ -79,7 +76,7 @@
                         #matricule="ngModel" ngModel>
                 </div>
                 <div class="alert alert-danger" *ngIf="matricule.errors?.['required'] && matricule.touched">
-                    matricule is required
+                    Champ matricule est requis
                 </div>
                 <!-- matricule validation end here -->
 
@@ -91,7 +88,7 @@
                         ngModel>
                 </div>
                 <div class="alert alert-danger" *ngIf="ville.errors?.['required'] && ville.touched">
-                    ville is required
+                    Champ ville est requis
                 </div>
                 <!-- ville validation end here -->
 
@@ -103,7 +100,7 @@
                         #marque="ngModel" ngModel>
                 </div>
                 <div class="alert alert-danger" *ngIf="marque.errors?.['required'] && marque.touched">
-                    marque is required
+                    Champ marque is required
                 </div>
                 <!-- marque validation end here -->
             </div>
@@ -120,7 +117,7 @@
                         ngModel>
                 </div>
                 <div class="alert alert-danger" *ngIf="color.errors?.['required'] && color.touched">
-                    color is required
+                    Champ couleur est requis
                 </div>
                 <!-- color validation end here -->
 
@@ -134,7 +131,7 @@
                     </select>
                 </div>
                 <div class="alert alert-danger" *ngIf="categorie.errors?.['required'] && categorie.touched">
-                    categorie is required
+                    Champ catégorie est requis
                 </div>
                 <!-- categorie validation end here -->
 
@@ -150,7 +147,7 @@
                     </select>
                 </div>
                 <div class="alert alert-danger" *ngIf="carburant_id.errors?.['required'] && carburant_id.touched">
-                    carburant_id is required
+                    Champ carburant_id est requis
                 </div>
                 <!-- carburant_id validation end here -->
 
@@ -163,7 +160,7 @@
                         #date_immatri="ngModel" ngModel>
                 </div>
                 <div class="alert alert-danger" *ngIf="date_immatri.errors?.['required'] && date_immatri.touched">
-                    date_immatri is required
+                    Champ date_immatriculation est requis
                 </div>
                 <!-- date_immatri validation end here -->
 
@@ -175,7 +172,7 @@
                         #puissance="ngModel" ngModel>
                 </div>
                 <div class="alert alert-danger" *ngIf="puissance.errors?.['required'] && puissance.touched">
-                    puissance is required
+                    Champ puissance est requis
                 </div>
                 <!-- puissance validation end here -->
 

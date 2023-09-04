@@ -22,8 +22,7 @@ export class AdduserComponent {
     let data=f.value
     console.log(data)
     this.usersService.addUser(data).subscribe(response=>{
-      console.log('hnaa')
-      console.log(response); 
+      //console.log(response); 
       this.message = response;
       if(this.message==='Agent existe déjà!'){
         this.messageErr=response

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AgenciesRoutingModule } from './agencies-routing.module';
 import { AgenciesComponent } from './agencies.component';
 import { FormsModule } from '@angular/forms';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AgenciesComponent
@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     AgenciesRoutingModule,
     FormsModule,
+    NgxPaginationModule,
+    
   ]
 })
 export class AgenciesModule { }

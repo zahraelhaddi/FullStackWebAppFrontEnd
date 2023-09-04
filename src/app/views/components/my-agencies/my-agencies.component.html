@@ -1,5 +1,5 @@
 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-    <h6 class="m-0 font-weight-bold text-primary">Agences</h6>
+    <h6 class="m-0 font-weight-bold text-warning">Agences</h6>
     <div class="dropdown no-arrow">
         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -52,7 +52,7 @@
         <tbody>
             <tr *ngFor="let agency of agencies; let i = index">
                 <td>
-                    <span class="badge py-2 px-3 fs-7 badge-light-primary ">{{agency.agency_id}}</span>
+                    <span class="badge py-2 px-3 fs-7 badge-light-primary ">#{{agency.agency_id}}</span>
                 </td>
                 <td>
                     <span class="badge py-2 px-3 fs-7 badge-light-primary ">{{agency.agency_name}}</span>

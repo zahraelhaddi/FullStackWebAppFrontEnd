@@ -85,14 +85,26 @@ export class UsersService {
     return true
   }
 
-
-  hasSpecificAdminToken(): boolean {
-    const username = this.getUsername();
-    return username === environment.usernameAdmin;
+    hasSpecificAdminToken(): boolean {
+      const token = localStorage.getItem('token'); // Replace with your method to retrieve the JWT token from storage
+  
+      if (token) {
+        try {
+          const decodedToken = this.helper.decodeToken(token);
+          return decodedToken.role === 'Admin'; // Check if the role is 'Admin'
+        } catch (error) {
+          console.error('Error decoding JWT token:', error);
+        }
+      }
+  
+      return false; // Return false if no token or if the role is not 'Admin'
     }
+
+
+}
 
   
 
 
 
-}
+

@@ -1,6 +1,7 @@
 <!-- Card Header - Dropdown -->
 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-    <h6 class="m-0 font-weight-bold text-primary">Transfers</h6>
+    <h6 class="m-0 font-weight-bold text-success">
+        Mes Transfers</h6>
     <div class="dropdown no-arrow">
         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -50,13 +51,15 @@
         <tbody>
             <tr *ngFor="let transfer of transfers; let i = index" class="table-row">
                 <td>
-                    <span class="badge py-2 px-3 fs-7 badge-light-primary ">{{transfer.transfer_id}}</span>
+                    <span class="badge py-2 px-3 fs-7 badge-light-primary ">#{{transfer.transfer_id}}</span>
                 </td>
                 <td>
-                    <span class="badge py-2 px-3 fs-7 badge-light-primary ">{{transfer.source_agency_id}}</span>
+                    <span class="badge py-2 px-3 fs-7 badge-light-primary ">{{transfer.source_agency.agency_name}}
+                        ({{transfer.source_agency.agency_location}})</span>
                 </td>
                 <td>
-                    <span class="badge py-2 px-3 fs-7 badge-light-primary ">{{transfer.destination_agency_id}}</span>
+                    <span
+                        class="badge py-2 px-3 fs-7 badge-light-primary ">{{transfer.destination_agency.agency_name}}({{transfer.destination_agency.agency_location}})</span>
                 </td>
                 <td>
                     <span class="badge py-2 px-3 fs-7 badge-light-primary ">{{transfer.transfer_date |

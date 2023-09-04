@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div *ngIf="data">
         <h2> {{ data.fullname }}</h2>
         <p><strong>ID :</strong> {{data.user_id}}</p>
@@ -9,14 +9,35 @@
             <i class="fas fa-pencil-alt fa-sm"></i>
         </button>
     </div>
-</div>
+</div> -->
 
+
+
+
+<div class="container mt-5">
+    <div *ngIf="data" class="profile-card">
+        <div class="profile-header">
+            <h2>{{ data.fullname }}</h2>
+        </div>
+        <div class="profile-details">
+            <p><strong>Id :</strong> {{data.user_id}}</p>
+            <p><strong>Email :</strong> {{ data.email }}</p>
+            <p><strong>Agence :</strong> {{ data.agency_id }}</p>
+        </div>
+        <div class="profile-actions">
+            <button class="btn btn-success btn-sm" (click)="getdata(data.user_id,data.fullname,data.email)"
+                data-toggle="modal" data-target="#exampleModal">
+                <i class="fas fa-pencil-alt fa-sm"></i> Modifier le Profile
+            </button>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modifier Votre Profile</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -34,10 +55,10 @@
 
                         </div>
                         <div class="alert alert-danger" *ngIf="fullname.errors?.['required'] && fullname.touched">
-                            fullname is required
+                            Champ Nom complet est requis
                         </div>
                         <div class="alert alert-danger" *ngIf="fullname.errors?.['minlength'] && fullname.touched">
-                            fullname must be minimum 1 or 2 or 3 or 4
+                            Champ Nom complet contient au minimum 3 lettres
                         </div>
                         <!-- agnecy_id validation end here -->
 
@@ -48,11 +69,9 @@
                                 required name="email" #email="ngModel" minlength="2" maxlength="20" ngModel>
                         </div>
                         <div class="alert alert-danger" *ngIf="email.errors?.['required'] && email.touched">
-                            email is required
+                            Champ email est requis
                         </div>
-                        <div class="alert alert-danger" *ngIf="email.errors?.['minlength'] && email.touched">
-                            email must be minimum 2 caractere
-                        </div>
+
                         <!-- model validation end here -->
                         <div class="top-alerts">
 
@@ -98,3 +117,91 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* profile.component.css */
+
+    /* Container */
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40vh;
+        /* Center vertically on the screen */
+    }
+
+    /* Profile card */
+    .profile-card {
+        max-width: 400px;
+        /* Set the maximum width for the card */
+        margin: 0 auto;
+        margin-top: 2px;
+        /* Center the card horizontally */
+        padding: 20px;
+        border: 1px solid #e0e0e0;
+        /* Light gray border */
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        /* Subtle box shadow */
+        background-color: #ffffff;
+        /* White background */
+    }
+
+    /* Profile header */
+    .profile-header {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333;
+        /* Dark text color */
+    }
+
+    /* Profile details */
+    .profile-details {
+        margin-bottom: 10px;
+        color: #666;
+        /* Slightly darker text color */
+    }
+
+    /* Strong labels in profile details */
+    .profile-details strong {
+        font-weight: bold;
+        color: #333;
+        /* Dark text color */
+    }
+
+    /* Profile actions */
+    .profile-actions {
+        margin-top: 15px;
+    }
+
+    /* Profile actions button */
+    .profile-actions button {
+        background-color: #28a745;
+        /* Green background color */
+        color: #fff;
+        /* White text color */
+        border: none;
+        border-radius: 5px;
+        padding: 8px 15px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+        /* Smooth hover transition */
+    }
+
+    /* Hover effect on profile actions button */
+    .profile-actions button:hover {
+        background-color: #218838;
+        /* Darker green on hover */
+    }
+
+    /* Responsive button style */
+    @media (max-width: 768px) {
+        .responsive-btn {
+            position: static;
+            margin-top: 2px;
+            width: 100%;
+        }
+    }
+</style>

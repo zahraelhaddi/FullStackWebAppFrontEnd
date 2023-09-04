@@ -20,9 +20,9 @@ export class AddCarComponent {
 
   add(f:any){
     let data=f.value
-    console.log(data)
+    //console.log(data)
     this.cs.addCar(data).subscribe(response=>{
-      console.log(response); 
+      //console.log(response); 
             this.messageSuccess = response;
       this.route.navigate(['/cars/add'])
 

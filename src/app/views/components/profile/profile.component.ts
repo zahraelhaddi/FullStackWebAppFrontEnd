@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -104,5 +104,8 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
+
+
+  
   
 }

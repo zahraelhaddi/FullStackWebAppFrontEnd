@@ -1,12 +1,4 @@
-<div class="container">
-    <!-- Page Heading -->
-
-
-    <!-- DataTales Example -->
-    <!-- <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Liste Agences</h6>
-        </div> -->
+<!-- <div class="container">
     <div class="container">
         <div *ngFor="let transfer of transfers" class="card mb-3">
             <div class="card-header" data-toggle="collapse" [attr.data-target]="'#collapse' + transfer.transfer_id">
@@ -30,9 +22,92 @@
             <i class=" fas fa-exchange-alt fa-sm"></i>
         </button>
     </div>
+</div> -->
+
+<!-- <div class="container">
+    <h2 class="my-4">Car Transfers</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Transfer ID</th>
+                <th>Utilisateur</th>
+                <th>Agence Source</th>
+                <th>Agence Destination</th>
+                <th>Model Voiture</th>
+                <th>Tax annulle</th>
+                <th>Transfer Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transfer of transfers">
+                <td>#{{ transfer.transfer_id }}</td>
+                <td>{{ transfer.user_info.fullname }}</td>
+                <td>{{ transfer.source_agency.agency_name }} ({{ transfer.source_agency.agency_location }})</td>
+                <td>{{ transfer.destination_agency.agency_name }} ({{ transfer.destination_agency.agency_location }})
+                </td>
+                <td>{{ transfer.car.model }}</td>
+                <td>{{ transfer.car.annual_tax }}DH</td>
+                <td>{{ transfer.transfer_date | date }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-success mt-3" data-toggle="modal" data-target="#transferModal">
+        <i class=" fas fa-exchange-alt fa-sm"></i>
+    </button>
+    <pagination-controls (pageChange)="config.currentPage = $event"></pagination-controls>
+
+</div> -->
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Liste Transfers
+            </h6>
+        </div>
+        <div class=" card-body">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="applyFilter()" placeholder="Search..."
+                    class="search-input" />
+                <div>
+                    <button title="Transférer" class="add-button" data-toggle="modal" data-target="#transferModal">
+                        <i class=" fas fa-exchange-alt fa-sm"></i>
+                    </button>
+                </div>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>transfert_id</th>
+                            <th>voiture transférée</th>
+                            <th>source</th>
+                            <th>destination</th>
+                            <th>utilisateur</th>
+                            <th>date transfert</th>
+                            <!-- <th>Details</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let transfer  of filteredtransfers | paginate: config ; ">
+                            <td>#{{ transfer.transfer_id}}</td>
+                            <td>{{ transfer.car.model }}</td>
+                            <td>{{ transfer.source_agency.agency_name }}</td>
+                            <td>{{ transfer.destination_agency.agency_name }}</td>
+                            <td>{{ transfer.user_info.fullname }}</td>
+                            <td>{{ transfer.transfer_date }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <pagination-controls (pageChange)="config.currentPage = $event"></pagination-controls>
+    </div>
+
+</div>
 
 
-    <!-- <div class="card-body">
+<!-- <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -61,78 +136,200 @@
         </div>
     </div>
 </div> -->
-    <!-- Add this before the closing </body> tag in your index.html -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Add this before the closing </body> tag in your index.html -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<style>
+    .table tr:hover {
+        background: rgba(133, 197, 224, 0.1);
+        backdrop-filter: blur(8px);
+    }
+
+    .table th {
+        background-color: #f8f9fa;
+
+    }
+
+    .table tbody tr:nth-child(odd) {
+        background-color: #f8f9fa;
+    }
+
+    .btn.btn-success {
+        background-color: #28a745;
+        color: #fff;
+    }
 
 
 
+    .add-button {
+        background-color: #007bff;
+        /* Button background color */
+        color: #fff;
+        /* Button text color */
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        margin-left: 500px;
+        /* Add margin to separate from the search bar */
+    }
 
-    <router-outlet></router-outlet>
+    .add-button:hover {
+        background-color: #0056b3;
+        /* Button background color on hover */
+    }
+
+    .add-button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 797px;
+    }
+
+    .search-container {
+        display: flex;
+        align-items: center;
+        background-color: #f2f3f5;
+        /* Background color */
+        padding: 6px;
+        border-radius: 5px;
+        width: 100%;
+        max-width: 250px;
+        /* Adjust the maximum width as needed */
+        margin: 0;
+        margin-bottom: 10px;
+        margin-top: 0px;
+        /* Move the search container to the left */
+    }
+
+    .search-icon {
+        font-size: 18px;
+        margin-right: 6px;
+        color: #6a7a8a;
+        /* Icon color */
+    }
+
+    .search-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        font-size: 16px;
+        color: #333;
+        /* Text color */
+    }
+
+    /* Add hover and focus styles for interactivity */
+    .search-input:hover {
+        background-color: #f2f3f5;
+        /* Background color on hover */
+    }
+
+    .search-input:focus {
+        background-color: #f2f3f5;
+        /* Background color on focus */
+    }
+</style>
 
 
-    <div class="modal fade" id="transferModal" tabindex="-1" aria-labelledby="transferModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="transferModalLabel">Transférer</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form #f="ngForm" (ngSubmit)="add(f)">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <!-- agency_name validation -->
-                                <div class="form-group">
-                                    <label for="transferAgencyName">voiture_id</label>
-                                    <input type="number" class="form-control" placeholder="Identifiant de la voiture"
-                                        required name="car_id" #agency_id="ngModel" ngModel>
-                                </div>
 
-                                <!-- agency_location validation -->
-                                <div class="form-group">
-                                    <label for="transferAgencyLocation">Agence source</label>
-                                    <input type="number" class="form-control" placeholder="source" required
-                                        name="source" #source="ngModel" ngModel>
-                                </div>
+<router-outlet></router-outlet>
 
 
-                                <div class="form-group">
-                                    <label for="transferAgencyLocation">Agence Destination</label>
-                                    <input type="number" class="form-control" placeholder="source" required
-                                        name="destination" #destination="ngModel" ngModel>
-                                </div>
+<div class="modal fade" id="transferModal" tabindex="-1" aria-labelledby="transferModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="transferModalLabel">Transférer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #f="ngForm" (ngSubmit)="add(f)">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- agency_name validation -->
+                            <!-- <div class="form-group">
+                                <label for="transferAgencyName">voiture_id</label>
+                                <input type="number" class="form-control" placeholder="Identifiant de la voiture"
+                                    required name="car_id" #car_id="ngModel" ngModel>
+                            </div> -->
+                            <div class="form-group">
+                                <label for="transferAgencyName">voiture_id</label>
+                                <select class="form-control" required name="car_id" [(ngModel)]="selectedCarId"
+                                    #car_id="ngModel" ngModel (ngModelChange)="onCarChange()">
+                                    <option *ngFor="let car of availableCars" [value]="car.car_id">
+                                        {{car.marque}} {{car.model}}</option>
 
-                                <div class="form-group">
-                                    <label for="transferAgencyLocation">utilisateur_id</label>
-                                    <input type="number" class="form-control" placeholder="user_id" required
-                                        name="user_id" #user_id="ngModel" ngModel>
-                                </div>
-                                <div class="top-alerts">
-                                    <div class="alert-container" *ngIf="messageSuccess">
-                                        <div class="alert alert-success">
-                                            {{ messageSuccess.msg }}
-                                        </div>
-                                    </div>
-                                    <div class="alert-container" *ngIf="messageErr">
-                                        <div class="alert alert-danger">
-                                            {{ messageErr.error }}
-                                        </div>
-                                    </div>
-                                </div>
-
-
+                                </select>
                             </div>
+
+                            <!-- agency_location validation -->
+                            <!-- <div class="form-group">
+                                <label for="transferAgencyLocation">Agence source</label>
+                                <input type="number" class="form-control" placeholder="source" required name="source"
+                                    #source="ngModel" ngModel>
+                            </div> -->
+                            <div class="form-group">
+                                <label for="transferAgencyLocation">Agence source</label>
+                                <select class="form-control" required name="source" #source="ngModel" ngModel>
+                                    <option *ngFor="let agency of sourceAgencies" [value]="agency.agency_id">
+                                        {{agency.agency_name}}</option>
+
+                                </select>
+                            </div>
+
+
+                            <!-- <div class="form-group">
+                                <label for="transferAgencyLocation">Agence Destination</label>
+                                <input type="number" class="form-control" placeholder="source" required
+                                    name="destination" #destination="ngModel" ngModel>
+                            </div> -->
+                            <div class="form-group">
+                                <label for="transferAgencyLocation">Agence Destination</label>
+                                <select class="form-control" required name="destination" #destination="ngModel" ngModel>
+                                    <option *ngFor="let agency of destinationAgencies" [value]="agency.agency_id">
+                                        {{agency.agency_name}}</option>
+
+                                </select>
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <label for="transferAgencyLocation">utilisateur_id</label>
+                                <input type="number" class="form-control" placeholder="user_id" required name="user_id"
+                                    #user_id="ngModel" ngModel>
+                            </div> -->
+
+
+                            <div class="top-alerts">
+                                <div class="alert-container" *ngIf="messageSuccess">
+                                    <div class="alert alert-success">
+                                        {{ messageSuccess.msg }}
+                                    </div>
+                                </div>
+                                <div class="alert-container" *ngIf="messageErr">
+                                    <div class="alert alert-danger">
+                                        {{ messageErr.error }}
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
-                        <button class="btn btn-primary responsive-btn">Enregistrer</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+                    </div>
+                    <button class="btn btn-primary responsive-btn">Enregistrer</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
