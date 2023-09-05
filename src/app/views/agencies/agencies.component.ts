@@ -19,6 +19,7 @@ export class AgenciesComponent {
     agency_location:''
   }
   filteredagencies: any;
+  message: any;
 
 
   constructor(private agenciesService:AgenciesService) {
@@ -42,12 +43,17 @@ export class AgenciesComponent {
   }
   addAgency(f:any){
     let data=f.value
-    console.log(data)
+    //console.log(data)
     this.agenciesService.addAgency(data).subscribe(response=>{
       console.log(response); 
             this.agencies=null;
              this.getAllagencies();
-             this.messageSuccess=response
+             this.message=response
+             if(this.message.msg==='Agence ajoutée avec Succès!'){
+              this.messageSuccess=this.message.msg
+             }else if(this.message.msg==='Agence existe déjà!'){
+              this.messageErr=this.message.msg
+             }
     },(err)=>{ 
       this.messageErr=err.error
       console.log(err.error)

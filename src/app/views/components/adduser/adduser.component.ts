@@ -20,7 +20,7 @@ export class AdduserComponent {
 
   add(f:any){
     let data=f.value
-    console.log(data)
+    //console.log(data)
     this.usersService.addUser(data).subscribe(response=>{
       //console.log(response); 
       this.message = response;

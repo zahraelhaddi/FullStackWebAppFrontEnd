@@ -167,7 +167,19 @@
                     <button class="btn btn-primary responsive-btn">Enregistrer</button>
                 </form>
 
+            </div>
+            <div class="top-alerts">
 
+                <div class="alert-container" *ngIf="messageSuccess">
+                    <div class="alert alert-success">
+                        {{ messageSuccess }}
+                    </div>
+                </div>
+                <div class="alert-container" *ngIf="messageErr">
+                    <div class="alert alert-danger">
+                        {{ messageErr }}
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
 
