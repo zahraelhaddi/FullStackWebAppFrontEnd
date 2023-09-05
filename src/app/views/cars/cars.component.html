@@ -48,7 +48,7 @@
                             <td>{{ car.model }}</td>
                             <td>{{ car.categorie }}</td>
                             <td>{{ car.color}}</td>
-                            <td>{{ car.annual_tax }}</td>
+                            <td>{{ car.annual_tax }} DH</td>
                             <td>
                                 <span [ngClass]="{'av': car.availability_status,'unav':!car.availability_status}">
                                     {{ car.availability_status ? 'Available' : 'Unavailable' }}
