@@ -161,10 +161,10 @@ export class CarsComponent implements OnInit {
       }
 
       applyFilter() {
-        this.filteredCars= this.cars.filter((car: { agency_id:number;marque: string; model: string; categorie: string; color: string; }) =>{
+        this.filteredCars= this.cars.filter((car: { agency_id:number;marque: string; model: string; categorie: string; color: string; agency_info: { agency_name: string}}) =>{
         const searchTerm = this.searchTerm.toLowerCase();
     return (
-      car.agency_id.toString().includes(searchTerm) ||
+      car.agency_info.agency_name.toLowerCase().includes(searchTerm) ||
       car.marque.toLowerCase().includes(searchTerm) ||
       car.model.toLowerCase().includes(searchTerm) ||
       car.categorie.toLowerCase().includes(searchTerm) ||

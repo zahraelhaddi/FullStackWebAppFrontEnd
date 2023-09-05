@@ -5,7 +5,7 @@ import { AgenciesService } from 'src/app/services/agencies.service';
 import { CarsService } from 'src/app/services/cars.service';
 import { TransfersService } from 'src/app/services/transfers.service';
 import { UsersService } from 'src/app/services/users.service';
-
+import {Chart} from 'chart.js';
 
 @Component({
   selector: 'app-transfers',
@@ -26,6 +26,7 @@ export class TransfersComponent {
 
 
 
+
   constructor(private transfersService:TransfersService,private agenciesService: AgenciesService,private carsService:CarsService,private usersService:UsersService,private route:Router) {
  
     this.getAlltransfers()
@@ -33,8 +34,10 @@ export class TransfersComponent {
     this.getAllAgencies();
     this.getAvailableCars()
    }
+
   ngOnInit(): void {
   }
+  
 
 getAllAgencies(){
   this.agenciesService.getAllagencies().subscribe(
@@ -107,10 +110,15 @@ getAllAgencies(){
 // }
 applyFilter() {
   const searchTerm = this.searchTerm.toLowerCase();
-  this.filteredtransfers = this.transfers.filter((transfer: {  
-  car: { car_id: { toString: () => string | string[]; }; };  }) => {
+  this.filteredtransfers = this.transfers.filter((transfer: { transfer_id: number; transfer_date:Date ; destination_agency: { agency_name: string};user_info: { fullname: string};car: { model: string}; source_agency: { agency_name: string}}) => {
     return (
-      transfer.car.car_id.toString().includes(searchTerm)
+      transfer.car.model.toLowerCase().includes(searchTerm)||
+      transfer.transfer_id.toString().includes(searchTerm) ||
+      transfer.source_agency.agency_name.toLowerCase().includes(searchTerm) ||
+      transfer.destination_agency.agency_name.toLowerCase().includes(searchTerm) ||
+      transfer.user_info.fullname.toLowerCase().includes(searchTerm) ||
+      transfer.transfer_date.toString().toLowerCase().includes(searchTerm.toLowerCase())
+
     );
   });
 }
@@ -156,5 +164,9 @@ getCarById(){
     
   }
 }
+
+
+
+
 
 }
