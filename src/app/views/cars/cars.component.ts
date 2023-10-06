@@ -28,10 +28,6 @@ export class CarsComponent implements OnInit {
     annual_tax:0
   }
   filteredCars: any;
-  
-  
-
-
 
   constructor(private carsService: CarsService,private route:Router) {
     this.getAllcars()
